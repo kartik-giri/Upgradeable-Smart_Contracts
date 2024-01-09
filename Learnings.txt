@@ -9,5 +9,22 @@ fatal: fetch-pack: invalid index-pack output
 fatal: clone of 'https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable' into submodule path 'C:/Users/karti/Desktop/upgradeable-contract/lib/openzeppelin-contracts-upgradeable' failed
 Error: 
 git submodule exited with code 128
-SSOLUTION:-git config --global http.lowSpeedLimit 0
+SOLUTION:-git config --global http.lowSpeedLimit 0
 git config --global http.lowSpeedTime 999999
+
+3.IMPORTANT: A proxy pointing at a proxiable contract should not be considered proxiable itself, because this risks bricking a proxy that upgrades to it,
+     // by delegating to itself until out of gas.: This is an important cautionary note. It emphasizes that a proxy pointing at a contract that is designed to 
+     //be upgradeable (proxiable) should not be considered upgradeable itself. If this were the case, it could lead to a situation where a proxy that upgrades 
+     //to such a contract could end up in a loop, repeatedly delegating to itself until running out of gas. This would essentially "brick" the proxy, making it unusable.
+
+4. Proxiable Contract: This is a contract designed to work seamlessly with proxies. It includes features or patterns that facilitate upgrades through 
+proxy mechanisms. The term "proxiable" implies that the contract is structured in a way that supports being used with proxies for upgradeability.
+
+5. The contract which gives the implementation contract address to the proxies is called a beacon contract.
+
+6. Abstract contracts are the contract which have at least one function undefined and they expect there child contracts to define those functions. 
+
+7. Proxies points to the storage slots not to the variable name and that's why storage clashes happens.
+
+8. Storage is stored in the proxy no the implementation.
+9. And proxy contract borrows the logic of implementation contract and delegatecall to that implementation contract.
